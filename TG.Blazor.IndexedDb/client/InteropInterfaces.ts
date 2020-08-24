@@ -37,6 +37,7 @@ export interface IIndexSpec {
     keyPath: string;
     unique?: boolean;
     auto: boolean;
+    multiEntry?: boolean;
 }
 
 export interface IDotNetInstanceWrapper {

@@ -23,5 +23,7 @@
         /// Only use if you are defining a primary key such as "id"
         /// </summary>
         public bool Auto { get; set; }
+
+        public bool? MultiEntry { get; set; }
     }
 }
