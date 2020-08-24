@@ -25,5 +25,8 @@
         public bool Auto { get; set; }
 
         public bool? MultiEntry { get; set; }
+
+        public string[] KeyPaths { get; set; }
+        public bool Compound { get; set; }
     }
 }

@@ -232,13 +232,14 @@ export class IndexedDbManager {
         let primaryKey = store.primaryKey;
 
         if (!primaryKey) {
-            primaryKey = { name: 'id', keyPath: 'id', auto: true };
+            primaryKey = { name: 'id', keyPath: 'id', auto: true};
         }
 
         const newStore = upgradeDB.createObjectStore(store.name, { keyPath: primaryKey.keyPath, autoIncrement: primaryKey.auto });
 
         for (var index of store.indexes) {
-            newStore.createIndex(index.name, index.keyPath, { unique: index.unique, multiEntry: index.multiEntry });
+            //console.log("newStore.createIndex " + index.name);
+            newStore.createIndex(index.name, index.compound ? index.keyPaths! : index.keyPath, { unique: index.unique, multiEntry: index.multiEntry });
         }
     }
 }

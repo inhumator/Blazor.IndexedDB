@@ -38,6 +38,8 @@ export interface IIndexSpec {
     unique?: boolean;
     auto: boolean;
     multiEntry?: boolean;
+    keyPaths?: string[];
+    compound?: boolean;
 }
 
 export interface IDotNetInstanceWrapper {
