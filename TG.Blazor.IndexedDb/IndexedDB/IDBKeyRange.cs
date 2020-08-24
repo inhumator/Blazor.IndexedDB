@@ -15,7 +15,14 @@ namespace TG.Blazor.IndexedDB.IndexedDB
 
         public override string ToString()
         {
-            return $"{(lower == null ? "" : (lowerOpen ? $">{lower}" : $">={lower}"))} {(upper == null ? "" : (upperOpen ? $">{upper}" : $">={upper}"))}";
+            try
+            {
+                return $"{(lower == null ? "" : (lowerOpen ? $"{lower}<" : $"{lower}<="))}x{(upper == null ? "" : (upperOpen ? $"<{upper}" : $"<={upper}"))}";
+            }
+            catch
+            {
+            }
+            return base.ToString();
         }
 
     }
