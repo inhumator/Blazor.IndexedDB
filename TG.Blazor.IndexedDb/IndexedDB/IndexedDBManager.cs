@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
+using TG.Blazor.IndexedDB.IndexedDB;
 
 namespace TG.Blazor.IndexedDB
 {
@@ -285,6 +286,30 @@ namespace TG.Blazor.IndexedDB
             {
                 var results = await CallJavascript<StoreIndexQuery<TInput>, IList<TResult>>(DbFunctions.GetAllRecordsByIndex, searchQuery);
                 RaiseNotification(IndexDBActionOutCome.Successful, 
+                    $"Retrieved {results.Count} records, for {searchQuery.QueryValue} on index {searchQuery.IndexName}");
+                return results;
+            }
+            catch (JSException jse)
+            {
+                RaiseNotification(IndexDBActionOutCome.Failed, jse.Message);
+                return default;
+            }
+        }
+
+        /// <summary>
+        /// Gets all of the records that match a given query in the specified index.
+        /// </summary>
+        /// <typeparam name="TInput"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="searchQuery"></param>
+        /// <returns></returns>
+        public async Task<IList<TResult>> GetAllRecordsByIndexEx<TResult>(StoreIndexQuery<IDBKeyRange> searchQuery)
+        {
+            await EnsureDbOpen();
+            try
+            {
+                var results = await CallJavascript<IList<TResult>>(DbFunctions.GetAllRecordsByIndexEx, searchQuery, searchQuery.QueryValue);
+                RaiseNotification(IndexDBActionOutCome.Successful,
                     $"Retrieved {results.Count} records, for {searchQuery.QueryValue} on index {searchQuery.IndexName}");
                 return results;
             }

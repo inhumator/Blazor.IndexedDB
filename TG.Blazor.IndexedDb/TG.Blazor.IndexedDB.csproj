@@ -8,7 +8,7 @@
     <DefaultItemExcludes>${DefaultItemExcludes};dist\**;node_modules\**</DefaultItemExcludes>
     <AssemblyName>TG.Blazor.IndexedDB</AssemblyName>
     <RootNamespace>TG.Blazor.IndexedDB</RootNamespace>
-    <Version>1.5.0.1-preview</Version>
+    <Version>1.5.0.6-preview</Version>
     <Authors>William Tulloch</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/wtulloch/Blazor.IndexedDB</RepositoryUrl>
@@ -17,8 +17,8 @@
     <Copyright>Copyright 2019 William Tulloch</Copyright>
     <PackageReleaseNotes>Updated to work with both server and client-side Blazor</PackageReleaseNotes>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <AssemblyVersion>1.5.0.1</AssemblyVersion>
-    <FileVersion>1.5.0.1</FileVersion>
+    <AssemblyVersion>1.5.0.6</AssemblyVersion>
+    <FileVersion>1.5.0.6</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,12 +27,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <WebpackInputs Include="**\*.ts" Exclude="wwwroot\**;node_modules\**; **\*.d.ts" />
+    <WebpackInputs Include="**\*.ts" Exclude="node_modules\**; **\*.d.ts" />
   </ItemGroup>
 
 
   <ItemGroup>
-    <Folder Include="IndexedDB\" />
     <Folder Include="client\" />
   </ItemGroup>
 
@@ -46,6 +45,13 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.7" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.7" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Content Update="wwwroot\indexedDb.Blazor.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <Target Name="EnsureNpmRestored" Condition="!Exists('node_modules')">

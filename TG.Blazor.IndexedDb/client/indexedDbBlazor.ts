@@ -140,6 +140,32 @@ export class IndexedDbManager {
         return results;
     }
 
+    public getAllRecordsByIndexEx = async (searchData: IIndexSearch, range: IDBKeyRange): Promise<any> => {
+        var range2 = IDBKeyRange.bound(range.lower, range.upper, range.lowerOpen, range.upperOpen);
+
+        const tx = this.getTransaction(this.dbInstance, searchData.storename, 'readonly');
+        let results: any[] = [];
+
+        tx.objectStore(searchData.storename)
+            .index(searchData.indexName)
+            .iterateCursor(range2,cursor => {
+                if (!cursor) {
+                    return;
+                }
+                results.push(cursor.value);
+                /*
+                if (cursor.key === searchData.queryValue) {
+                    
+                }
+                */
+                cursor.continue();
+            });
+
+        await tx.complete;
+
+        return results;
+    }
+
     public getRecordById = async (storename: string, id: any): Promise<any> => {
 
         const tx = this.getTransaction(this.dbInstance, storename, 'readonly');
