@@ -8,17 +8,17 @@
     <DefaultItemExcludes>${DefaultItemExcludes};dist\**;node_modules\**</DefaultItemExcludes>
     <AssemblyName>TG.Blazor.IndexedDB</AssemblyName>
     <RootNamespace>TG.Blazor.IndexedDB</RootNamespace>
-    <Version>1.5.0.13-preview</Version>
+    <Version>1.5.0.14-preview</Version>
     <Authors>William Tulloch</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/wtulloch/Blazor.IndexedDB</RepositoryUrl>
     <RepositoryType>GIT</RepositoryType>
     <Description>A Blazor library for interacting with IndexedDB</Description>
     <Copyright>Copyright 2019 William Tulloch</Copyright>
-    <PackageReleaseNotes>count (2)</PackageReleaseNotes>
+    <PackageReleaseNotes>count (3)</PackageReleaseNotes>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <AssemblyVersion>1.5.0.13</AssemblyVersion>
-    <FileVersion>1.5.0.13</FileVersion>
+    <AssemblyVersion>1.5.0.14</AssemblyVersion>
+    <FileVersion>1.5.0.14</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
