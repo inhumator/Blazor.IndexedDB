@@ -270,14 +270,16 @@ namespace TG.Blazor.IndexedDB
         }
 
 
-        public async Task<long?> CountByRange<TResult>(StoreIndexQuery<IDBKeyRange> searchQuery)
+        public async Task<long?> CountByRange<TResult>(string storeName, IDBKeyRange range)
         {
             await EnsureDbOpen();
             try
             {
-                var results = await CallJavascript<long>(DbFunctions.CountByRange, searchQuery, searchQuery.QueryValue);
+
+                var results = await CallJavascript<long>(DbFunctions.CountByRange, storeName, range);
+
                 RaiseNotification(IndexDBActionOutCome.Successful,
-                    $"Counted {results} records, for {searchQuery.QueryValue} on index {searchQuery.IndexName}");
+                    $"Counted {results} records, for {range}.");
                 return results;
             }
             catch (JSException jse)
@@ -286,7 +288,7 @@ namespace TG.Blazor.IndexedDB
                 return default;
             }
         }
-
+        
         /// <summary>
         /// Returns the first record that matches a query against a given index
         /// </summary>
