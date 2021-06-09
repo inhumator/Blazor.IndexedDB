@@ -96,7 +96,7 @@
             IndexName = SelectedIndex,
             QueryValue = SearchString,
         };
-
+        var c = await DbManager.Count(DbManager.Stores[0].Name);
         if (GetAll)
         {
             var result = await DbManager.GetAllRecordsByIndex<string, Person>(indexSearch);

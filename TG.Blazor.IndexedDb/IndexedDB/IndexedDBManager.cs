@@ -249,6 +249,44 @@ namespace TG.Blazor.IndexedDB
             
         }
 
+        public async Task<long?> Count(string storeName)
+        {
+            if (string.IsNullOrEmpty(storeName))
+            {
+                throw new ArgumentException("Parameter cannot be null or empty", nameof(storeName));
+            }
+
+            try
+            {
+                var result = await CallJavascript<string, long>(DbFunctions.CountAll, storeName);
+                RaiseNotification(IndexDBActionOutCome.Successful, $"Counted: {result} items.");
+                return result;
+            }
+            catch (JSException jse)
+            {
+                RaiseNotification(IndexDBActionOutCome.Failed, jse.Message);
+                return default;
+            }
+        }
+
+
+        public async Task<long?> CountByRange<TResult>(StoreIndexQuery<IDBKeyRange> searchQuery)
+        {
+            await EnsureDbOpen();
+            try
+            {
+                var results = await CallJavascript<long>(DbFunctions.CountByIndexEx, searchQuery, searchQuery.QueryValue);
+                RaiseNotification(IndexDBActionOutCome.Successful,
+                    $"Counted {results} records, for {searchQuery.QueryValue} on index {searchQuery.IndexName}");
+                return results;
+            }
+            catch (JSException jse)
+            {
+                RaiseNotification(IndexDBActionOutCome.Failed, jse.Message);
+                return default;
+            }
+        }
+
         /// <summary>
         /// Returns the first record that matches a query against a given index
         /// </summary>

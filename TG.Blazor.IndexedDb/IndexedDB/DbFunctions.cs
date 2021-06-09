@@ -14,6 +14,9 @@
         public const string DeleteRecord = "deleteRecord";
         public const string GetRecordById = "getRecordById";
         public const string ClearStore = "clearStore";
+        public const string CountAll = "countAll";
+        //public const string CountByIndex = "countByIndex";
+        public const string CountByRange = "countByRange";
         public const string GetRecordByIndex = "getRecordByIndex";
         public const string GetAllRecordsByIndex = "getAllRecordsByIndex";
         public const string GetAllRecordsByIndexEx = "getAllRecordsByIndexEx";
