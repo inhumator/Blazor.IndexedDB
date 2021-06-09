@@ -107,6 +107,27 @@ export class IndexedDbManager {
         return `Store ${storeName} cleared`;
     }
 
+    public countAll = async (storeName: string): Promise<number> => {
+
+        const tx = this.getTransaction(this.dbInstance, storeName, 'readwrite');
+
+        var result = await tx.objectStore(storeName).count();
+        await tx.complete;
+
+        return result;
+    }
+
+    public countByRange = async (storename: string,range: IDBKeyRange): Promise<number> => {
+        var range2 = IDBKeyRange.bound(range.lower, range.upper, range.lowerOpen, range.upperOpen);
+
+        const tx = this.getTransaction(this.dbInstance, storename, 'readwrite');
+
+        var result = await tx.objectStore(storename).count(range2);
+        await tx.complete;
+
+        return result;
+    }
+
     public getRecordByIndex = async (searchData: IIndexSearch): Promise<any> => {
         const tx = this.getTransaction(this.dbInstance, searchData.storename, 'readonly');
         const results = await tx.objectStore(searchData.storename)
